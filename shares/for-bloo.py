@@ -1,8 +1,13 @@
 FEET_TO_MILES_RATIO = 5280
+FEET_TO_METERS_RATIO = 3.2
 
 
 def miles_to_feet(x):
     return FEET_TO_MILES_RATIO * x
+
+
+def meters_to_feet(x):
+    return FEET_TO_METERS_RATIO * x
 
 
 class RectangularArea:
@@ -126,4 +131,24 @@ if __name__ == "__main__":
     formatted_output = "{:,}".format(int(concrete_needed_cubic_feet))
     print(
         f"Bloo's structure would contain {formatted_output} cubic feet of concrete, given the assumptions"
+    )
+
+    # assuming a typical cement truck can carry about 8 cubic meters at a time
+    assumed_truck_capacity = meters_to_feet(8)
+
+    truck_count = int(concrete_needed_cubic_feet / assumed_truck_capacity)
+    formatted_truck_output = "{:,}".format(int(truck_count))
+    print(f"That's about {formatted_truck_output} many cement trucks worth.")
+
+    grand_canyon_bounding_volume = (
+        miles_to_feet(277) * miles_to_feet(18) * miles_to_feet(1)
+    )
+    formatted_grand_canyon_output = "{:,}".format(grand_canyon_bounding_volume)
+
+    comparison_percent = "{:.3}".format(
+        100 * concrete_needed_cubic_feet / grand_canyon_bounding_volume
+    )
+
+    print(
+        f"By comparison, the Grand Canyon can fit in a box that is {formatted_grand_canyon_output} cubic feet (the structure is about about {comparison_percent} percent of that volume)"
     )
